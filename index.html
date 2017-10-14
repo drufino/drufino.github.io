@@ -1,11 +1,21 @@
 <html>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.2/vega.min.js"/>
-    <head>
-        <title>Test</title>
-    </head>
-    <body style="overflow:hidden; height:100%">
-        <div id="app"></div>
-        <script src="bundle.js"></script>
-    </body>
-</html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css"/>
+    <title>David Rufino</title>
+  </head>
+  <style>
+    .larger_link {
+      font-size:1.2em
+    }
+  </style>
+  <body>
+    <div class="ui main container">
+      <h1>Technical Stuff</h1>
+      <ul>
+        <li>Constant Time <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES</a> using SSSE3 instructions. Reimplementation of <a href="https://crypto.stanford.edu/vpaes/">VPAES</a> using intrinsics. <a class="larger_link" href="https://github.com/drufino/libtinfoil">[source]</a> <a class="larger_link" href="https://github.com/drufino/libtinfoil/raw/master/docs/vpaes_details.pdf">[write up]</a></li>
+        <li>Minimal Implementation of <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a> (in development) <a class="larger_link" href="https://github.com/drufino/minTLS">[source]</a></li>
+        <li>Introduction to Abstract Algebraic Geometry motivated by Weil Conjectures <a class="larger_link" href="alggeom.pdf">[PDF]</a></li>
+        <li>Personal Finance App <a class="larger_link" href="finance_app/index.html">[Link]</a> (w/ <a href="https://reactjs.org/">React</a>, <a href="https://mobx.js.org/">MobX</a> and <a href="https://react.semantic-ui.com/">Semantic-UI</a>)
+      </ul>
+    </div>
+  </body>
