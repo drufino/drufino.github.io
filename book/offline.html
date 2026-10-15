@@ -2,7 +2,29 @@
    inside the shell's iframe (or opened directly on their own). Copied
    verbatim into build/pages/ by split.py and linked via <link rel="stylesheet">
    -- edit this file directly and re-run split.py to see changes; nothing in
-   here is generated from Python. */
+   here is generated from Python.
+
+   This file is ALSO embedded verbatim into build_offline.py's single-file
+   book (read directly via content_css = (CSS_DIR / "content.css").read_text()),
+   which has a meaningfully different scroll/positioning model: one
+   document instead of per-page iframes, nav.topbar forced to
+   position: fixed instead of this file's own position: sticky (see
+   OFFLINE_SHELL_CSS's own comment for why), sidebar overlay instead of a
+   static iframe. A rule here that touches position, overflow, or scroll
+   behavior on anything between nav.topbar and the real document root --
+   not just nav.topbar itself -- can silently break one edition while
+   fixing the other, often only on real mobile Safari, not in any desktop
+   testing. (Confirmed twice this way: body's overflow-x broke nav.topbar's
+   stickiness on a real iPhone; .page-content's overflow-x, added once
+   trying to fix that without touching body, broke it a totally different
+   way -- turned .page-content into an unintended scroll-container context
+   sticky then bound to instead of the viewport, on desktop Safari too, not
+   just mobile.) When a fix is genuinely positioning/scroll-related and
+   only one edition needs it, put it in that edition's own layer instead --
+   shell.css (loaded by split.py's index.html, not content pages) for
+   nav/sidebar/shell-level concerns, or OFFLINE_SHELL_CSS in
+   build_offline.py (loaded after this file, so it can override anything
+   here) for the single-file book. */
 
 /* Color tokens -- light values on bare :root, dark values redefined both
    under system "prefers-color-scheme: dark" (guarded so an explicit light
@@ -48,14 +70,41 @@
    one stray wide element (a long unwrapped math line, a table before its
    own truncation/scroll handling kicks in, etc.) makes the whole page
    horizontally scrollable, which on a touchscreen is very easy to trigger
-   by accident while just trying to scroll down. Needs to be on BOTH html
-   and body: the browser's actual viewport-scrolling box is the root
-   (html) element, not body, so overflow-x:hidden on body alone still left
-   html itself scrollable (confirmed empirically -- document.documentElement
-   .scrollWidth stayed wider than clientWidth with only the body rule). The
-   deliberate internal horizontal-scroll containers (.centered,
-   .bordered-table) are unaffected -- they manage their own
-   overflow-x: auto already, this only clips at the page's own edge. */
+   by accident while just trying to scroll down. The deliberate internal
+   horizontal-scroll containers (.centered, .bordered-table) are
+   unaffected -- they manage their own overflow-x: auto already, this only
+   clips at the page's own edge.
+
+   html keeps overflow-x: hidden (needed at the true viewport level -- see
+   the comment this replaces, which found body's copy alone insufficient).
+   body's own copy was removed: it's a known WebKit/Safari bug trigger for
+   nav.topbar's position: sticky just below -- confirmed on a real iPhone,
+   not reproducible in desktop Safari or Responsive Design Mode, same
+   failure mode build_offline.py's single-file book hit (its own comment
+   has the fuller story). Every content page here is its own full document
+   loaded into the shell's iframe, so it's just as much a "real" top-level
+   document for this bug's purposes as the offline book is, despite being
+   embedded.
+
+   Unlike the offline book, there's no scoped replacement clip here (e.g.
+   on .page-content) standing in for body's removed one -- tried that
+   first, and it doesn't work: overflow-x: hidden on ANY ancestor of
+   nav.topbar implicitly promotes that ancestor's overflow-y to auto too
+   (per spec, inescapably, regardless of writing overflow-y: visible
+   alongside it -- confirmed empirically), turning it into its own
+   scroll-container context that position: sticky then binds to instead of
+   the real viewport scroll, breaking it completely (not just on iPhone --
+   on desktop Safari too). The offline book's own nav.topbar is
+   position: fixed, not sticky, which doesn't have this problem (a fixed
+   element's containing block is the viewport regardless of an ancestor's
+   overflow, unless that ancestor also has a transform/filter/
+   perspective/will-change) -- its own .main-content clip is safe for that
+   reason, not a pattern to copy here. html's own overflow-x: hidden is
+   left to do this job alone: it's already the real scrolling element
+   (with or without this rule), so, unlike giving some other ancestor its
+   own overflow, it doesn't introduce a NEW nested scroll context for
+   sticky to get confused by -- it just additionally clips horizontal
+   overflow at the one scroll context that already existed. */
 html {
   overflow-x: hidden;
 }
@@ -66,7 +115,6 @@ body {
   color: var(--fg);
   font-family: "Latin Modern Roman", Georgia, serif;
   line-height: 1.5;
-  overflow-x: hidden;
 }
 
 /* Border sits on the actual text column's edge (matching where nav.topbar's
@@ -78,7 +126,15 @@ body {
   max-width: 52rem;
   min-height: 100vh;
   margin: 0;
-  padding: 0 1.5rem 3rem;
+  /* Bottom padding is generous (not just a small visual gap) on purpose:
+     iOS Safari's address/tab bar can collapse and expand as you scroll,
+     and the space it occupies isn't always reserved from the page's own
+     scrollable height -- without enough slack past the real end of the
+     content, the last line or two can end up stuck behind that bar with
+     no further room to scroll into to reveal it (reported on a real
+     iPhone, not reproducible in desktop Safari or Responsive Design Mode,
+     same class of real-device-only issue as other fixes in this file). */
+  padding: 0 1.5rem 8rem;
   border-right: 1px solid var(--border);
 }
 
@@ -282,6 +338,12 @@ h3.subsection-heading {
    tracks, twice their share when there's room to spare), so the title can
    then be truncated with an ellipsis -- see .current below -- instead of
    the grid overflowing. */
+/* position: sticky here is the multi-page site's own choice (correct for
+   its per-page-iframe model); build_offline.py's OFFLINE_SHELL_CSS
+   overrides this specific rule to position: fixed for the single-file
+   book (a plain same-selector override, safe -- unlike the ancestor-level
+   overflow mistake the file header above warns about, this one doesn't
+   have a spooky-action-at-a-distance failure mode). */
 nav.topbar {
   position: sticky;
   top: 0;

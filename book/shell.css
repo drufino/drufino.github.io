@@ -457,6 +457,18 @@ iframe.ref-frame {
   flex: 1 1 auto;
   border: 0;
   width: 100%;
+  /* A nested iframe inside a position:fixed ancestor is a known iOS Safari
+     touch-scroll trap: without this, a touch-drag gesture starting over the
+     iframe can fail to engage the iframe's OWN document scroll at all and
+     fall through to the main page behind it instead -- reported on a real
+     iPhone, not reproducible in desktop Safari or Responsive Design Mode
+     (neither synthesizes the real touch-event routing this depends on).
+     The offline book doesn't have this problem at all: its citation
+     preview clones content into a plain scrollable <div> rather than a
+     second iframe, which is a more robust architecture for exactly this
+     reason, but switching the multi-page site's own preview over to that
+     same approach is a bigger change than this fix. */
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (max-width: 760px) {
