@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>4.1.4 Quasi-Homeomorphism</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><script>
+window.MathJax = {
+  options: { renderActions: { assistiveMml: [] } }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js"></script><link rel="stylesheet" href="content.css"></head><body><script>window.addEventListener('message',function(ev){if(!ev.data||!('theme' in ev.data))return;if(ev.data.theme){document.documentElement.setAttribute('data-theme',ev.data.theme);}else{document.documentElement.removeAttribute('data-theme');}});</script><div class="page-content"><nav class="topbar"><span class="nav-left"><a href="4.1-topological-spaces.html">&uarr; 4.1</a> &middot; <a href="4.1.3-continuous-maps.html">&larr; 4.1.3 Continuous Maps</a></span><span class="nav-center current">4.1.4 Quasi-Homeomorphism</span><span class="nav-right"><a href="4.1.5-kolmogorov-spaces.html">4.1.5 Kolmogorov Spaces &rarr;</a></span></nav><h3 id="loc-184" class="subsection-heading">4.1.4 Quasi-Homeomorphism</h3><div class="thm-block"><strong>Proposition 4.1.31 (Quasi-Homeomorphism)</strong><br><em><p>Let <math><mi>𝑓</mi><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mi>𝑋</mi><mo stretchy="false">→</mo><mi>𝑌</mi></math> be a map. The following are equivalent</p><ol><li>The map <math><mi>𝑊</mi><mo stretchy="false">→</mo><msup><mi>𝑓</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo>(</mo><mi>𝑊</mi><mo>)</mo></mrow></math> is a bijection between open sets</li><li>The map <math><mi>𝑍</mi><mo stretchy="false">→</mo><msup><mi>𝑓</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo>(</mo><mi>𝑍</mi><mo>)</mo></mrow></math> is a bijection between closed sets</li></ol><p>In this case we say <math><mi>𝑓</mi></math> is a <strong>quasi-homeomorphism</strong>. Such a map induces a bijection between irreducible sets, respectively irreducible components.</p></em></div><div><em>Proof.</em> This follows by taking complements and observing <math><mi>𝑋</mi><mo>∖</mo><msup><mi>𝑓</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo>(</mo><mi>𝐴</mi><mo>)</mo></mrow><mo>=</mo><msup><mi>𝑓</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo>(</mo><mrow><mi>𝑌</mi><mo>∖</mo><mi>𝐴</mi></mrow><mo>)</mo></mrow></math>.&nbsp;<math><mi>∎</mi></math></div><div class="thm-block"><strong><a id="thm-topology-induced-quotient" href="#thm-topology-induced-quotient" class="thm-anchor">Proposition 4.1.32 (Induced Quotient)</a></strong><br><em><p>Let <math><mi>𝜋</mi><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mi>𝑋</mi><mo stretchy="false">→</mo><mi>𝑌</mi></math> be a surjective map where <math><mi>𝑋</mi></math> is a topological space. The family</p><math display="block"><msub><mi>𝒯︀</mi><mi>𝑌</mi></msub><mo>≔</mo><mrow><mo>{</mo><mrow><mi>𝑈</mi><mo>⊂</mo><mi>𝑌</mi><mo fence="false" stretchy="true" symmetric="true">|</mo><msup><mi>𝜋</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo>(</mo><mi>𝑈</mi><mo>)</mo></mrow><mo>∈</mo><msub><mi>𝒯︀</mi><mi>𝑋</mi></msub></mrow><mo>}</mo></mrow></math><p>is a well-defined topology on <math><mi>𝑌</mi></math>. Suppose that <math><msup><mi>𝜋</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo>(</mo><mrow><mi>𝜋</mi><mrow><mo>(</mo><mi>𝑉</mi><mo>)</mo></mrow></mrow><mo>)</mo></mrow><mo>⊂</mo><mi>𝑉</mi></math> for all <math><mi>𝑉</mi></math> open (resp. closed) subsets of <math><mi>𝑋</mi></math>. Then <math><mi>𝜋</mi></math> is both open, closed and a quasi-homeomorphism.</p></em></div><div><p><em>Proof.</em> As arbitrary intersections and unions commute with inverse image we see that <math><msub><mi>𝒯︀</mi><mi>𝑌</mi></msub></math> is a well-defined topology.</p><p>As <math><mi>𝜋</mi></math> is surjective we have <math><mi>𝜋</mi><mrow><mo>(</mo><mrow><msup><mi>𝜋</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo>(</mo><mi>𝑈</mi><mo>)</mo></mrow></mrow><mo>)</mo></mrow><mo>=</mo><mi>𝑈</mi></math> for all open subsets <math><mi>𝑈</mi><mo>⊂</mo><mi>𝑌</mi></math>. Generically <math><mi>𝑉</mi><mo>⊂</mo><msup><mi>𝜋</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo>(</mo><mrow><mi>𝜋</mi><mrow><mo>(</mo><mi>𝑉</mi><mo>)</mo></mrow></mrow><mo>)</mo></mrow></math> and by assumption the reverse inclusion holds. Therefore we see <math><mi>𝜋</mi></math> induces a quasi-homeomorphism. This also shows <math><mi>𝜋</mi></math> is open and therefore closed.&nbsp;<math><mi>∎</mi></math></p></div></div><script>try{parent.postMessage({tocPage:'4.1.4-quasi-homeomorphism.html'}, '*')}catch(e){}</script><script>document.querySelectorAll('a[href*="#thm-"], a[href*="#bib-"]').forEach(function(a){var pending = null;a.addEventListener('click', function(ev){ev.preventDefault();if (pending) { clearTimeout(pending); pending = null; return; }pending = setTimeout(function(){pending = null;var href = a.getAttribute('href');var hashIdx = href.indexOf('#');var page = hashIdx > 0 ? href.slice(0, hashIdx) : '4.1.4-quasi-homeomorphism.html';var anchor = href.slice(hashIdx + 1);try{parent.postMessage({openRef:{page:page,anchor:anchor}}, '*')}catch(e){}}, 300);});a.addEventListener('dblclick', function(ev){ev.preventDefault();window.location.href = a.getAttribute('href');});});</script><script>if (window.name === 'ref') {document.body.classList.add('in-ref-panel');var nav = document.querySelector('nav.topbar');if (nav) nav.style.display = 'none';document.querySelectorAll('h1, h2, h3, [id^="thm-"]').forEach(function(el){el.style.scrollMarginTop = '0';});if (location.hash.indexOf('#thm-') === 0) {var target = document.getElementById(location.hash.slice(1));var thmDiv = target ? target.closest('.thm-block') : null;if (thmDiv) {var keep = [thmDiv];var next = thmDiv.nextElementSibling;if (next && next.tagName === 'DIV' && !next.classList.contains('thm-block') && next.textContent.trim().indexOf('Proof.') === 0) {keep.push(next);}var pc = document.querySelector('.page-content');Array.prototype.forEach.call(pc.children, function(child){if (keep.indexOf(child) === -1) child.style.display = 'none';});window.scrollTo(0, 0);}}}</script><script>(function(){function report(){var el = document.querySelector('.page-content');if (!el) return;try{parent.postMessage({contentRight: el.getBoundingClientRect().right}, '*')}catch(e){}}window.addEventListener('resize', report);window.addEventListener('load', report);report();})();</script></body></html>

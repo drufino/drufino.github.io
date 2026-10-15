@@ -44,12 +44,29 @@
   box-sizing: border-box;
 }
 
+/* Locks the PAGE to vertical-only scrolling/dragging -- without this, any
+   one stray wide element (a long unwrapped math line, a table before its
+   own truncation/scroll handling kicks in, etc.) makes the whole page
+   horizontally scrollable, which on a touchscreen is very easy to trigger
+   by accident while just trying to scroll down. Needs to be on BOTH html
+   and body: the browser's actual viewport-scrolling box is the root
+   (html) element, not body, so overflow-x:hidden on body alone still left
+   html itself scrollable (confirmed empirically -- document.documentElement
+   .scrollWidth stayed wider than clientWidth with only the body rule). The
+   deliberate internal horizontal-scroll containers (.centered,
+   .bordered-table) are unaffected -- they manage their own
+   overflow-x: auto already, this only clips at the page's own edge. */
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
   font-family: "Latin Modern Roman", Georgia, serif;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 /* Border sits on the actual text column's edge (matching where nav.topbar's
@@ -251,7 +268,20 @@ h3.subsection-heading {
 /* Three-column grid -- left/right tracks are equal width (1fr each) so the
    center track is genuinely centered on the bar regardless of how long the
    Prev/Next link text is, rather than merely "centered in the leftover
-   space" the way flexbox's justify-content:space-between would leave it. */
+   space" the way flexbox's justify-content:space-between would leave it.
+   The center track used to be `auto` (shrink-to-fit its title text, with no
+   cap at all) -- fine as long as the title was short enough to share the
+   bar with Prev/Next, but CSS Grid sizes an `auto` track to its content's
+   full intrinsic width regardless of how little room is actually left, so
+   a long section title (e.g. "3.8 Polynomial Rings in One Variable") could
+   claim the whole bar on a narrow/mobile viewport and push the Next link
+   fully out of its column with nothing left to render it in -- not just
+   visually cramped, genuinely gone. `2fr` instead of `auto` makes the
+   center a real flexible track that actually shrinks under pressure
+   (participates in the same space-distribution pass as the 1fr side
+   tracks, twice their share when there's room to spare), so the title can
+   then be truncated with an ellipsis -- see .current below -- instead of
+   the grid overflowing. */
 nav.topbar {
   position: sticky;
   top: 0;
@@ -263,7 +293,7 @@ nav.topbar {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   gap: 1rem;
   font-family: system-ui, sans-serif;
@@ -273,16 +303,21 @@ nav.topbar {
 nav.topbar .nav-left {
   text-align: left;
   justify-self: start;
+  min-width: 0;
 }
 
 nav.topbar .nav-center {
   text-align: center;
   justify-self: center;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 nav.topbar .nav-right {
   text-align: right;
   justify-self: end;
+  min-width: 0;
 }
 
 nav.topbar a {
@@ -298,6 +333,11 @@ nav.topbar .current {
   color: var(--current);
   font-weight: 600;
   white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
 }
 
 /* Theorem label permalinks (see wrap_theorem_labels()) -- look identical to

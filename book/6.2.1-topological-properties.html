@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>6.2.1 Topological Properties</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><script>
+window.MathJax = {
+  options: { renderActions: { assistiveMml: [] } }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js"></script><link rel="stylesheet" href="content.css"></head><body><script>window.addEventListener('message',function(ev){if(!ev.data||!('theme' in ev.data))return;if(ev.data.theme){document.documentElement.setAttribute('data-theme',ev.data.theme);}else{document.documentElement.removeAttribute('data-theme');}});</script><div class="page-content"><nav class="topbar"><span class="nav-left"><a href="6.2-abstract-varieties.html">&uarr; 6.2</a> &middot; <a href="6.2-abstract-varieties.html">&larr; 6.2 Abstract Varieties</a></span><span class="nav-center current">6.2.1 Topological Properties</span><span class="nav-right"><a href="6.2.2-local-ring.html">6.2.2 Local Ring &rarr;</a></span></nav><h3 id="loc-292" class="subsection-heading">6.2.1 Topological Properties</h3><div class="thm-block"><strong>Definition 6.2.5 (Integral Variety)</strong><br><em>We say a variety <math><mi>𝑋</mi></math> is <strong>integral</strong> (or irreducible) if it is irreducible as a topological space.</em></div><div class="thm-block"><strong>Proposition 6.2.6 (Criteria for Integrality)</strong><br><em><p>Let <math><mi>𝑋</mi></math> be a variety. Then the following are equivalent</p><ol><li><math><mi>𝑋</mi></math> is integral</li><li><math><msub><mi>𝒪︀</mi><mi>𝑋</mi></msub><mrow><mo>(</mo><mi>𝑈</mi><mo>)</mo></mrow></math> is integral for every open subset <math><mi>𝑈</mi><mo>⊂</mo><mi>𝑋</mi></math></li></ol></em></div><div class="thm-block"><strong><a id="thm-alggeom-abstract-variety-is-noetherian" href="#thm-alggeom-abstract-variety-is-noetherian" class="thm-anchor">Proposition 6.2.7 (Varieties are Noetherian and Hereditarily Quasi-Compact)</a></strong><br><em>Let <math><mi>𝑋</mi></math> be a variety. Then <math><mi>𝑋</mi></math> is Noetherian as a topological space and every open subset is quasi-compact (and Noetherian).</em></div><div><em>Proof.</em> (<a href="4.1.11-noetherian-topological-spaces.html#thm-topology-finite-cover-is-noetherian">4.1.78</a>) and (<a href="4.1.14-quasi-compactness.html#thm-topological-spaces-noetherian-implies-quasi-compact">4.1.114</a>).&nbsp;<math><mi>∎</mi></math></div><div class="thm-block"><strong><a id="thm-alggeom-variety-decomposition-irreducibles" href="#thm-alggeom-variety-decomposition-irreducibles" class="thm-anchor">Corollary 6.2.8</a></strong><br><em><p>Let <math><mi>𝑋</mi></math> be a variety. Then it may be expressed uniquely as a finite union of (closed) irreducible components.</p><math display="block"><mi>𝑋</mi><mo>=</mo><msub><mi>𝑋</mi><mn>1</mn></msub><mo>∪</mo><mi>…</mi><mo>∪</mo><msub><mi>𝑋</mi><mi>𝑛</mi></msub></math></em></div><div><em>Proof.</em> See (<a href="4.1.11-noetherian-topological-spaces.html#thm-decompositionirreducibles">4.1.76</a>).&nbsp;<math><mi>∎</mi></math></div><div class="thm-block"><strong>Proposition 6.2.9</strong><br><em>Suppose <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><msub><mi>𝒪︀</mi><mi>𝑋</mi></msub></mrow><mo>)</mo></mrow></math> is a space with functions such that <math><mi>𝑋</mi><mo>=</mo><msubsup><mo form="prefix" lspace="0em">⋃</mo><mrow><mi>𝑖</mi><mo lspace="0em" rspace="0em">=</mo><mn>1</mn></mrow><mi>𝑛</mi></msubsup><msub><mi>𝑈</mi><mi>𝑖</mi></msub></math> and <math><mrow><mo>(</mo><mrow><msub><mi>𝑈</mi><mi>𝑖</mi></msub><mo>,</mo><msub><mi>𝒪︀</mi><mi>𝑋</mi></msub><msub><mo stretchy="false">|</mo><msub><mi>𝑈</mi><mi>𝑖</mi></msub></msub></mrow><mo>)</mo></mrow></math> is a variety. Then so is <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><msub><mi>𝒪︀</mi><mi>𝑋</mi></msub></mrow><mo>)</mo></mrow></math>.</em></div><div><em>Proof.</em> Each <math><msub><mi>𝑈</mi><mi>𝑖</mi></msub></math> is a finite union of affine varieties and therefore so is <math><mi>𝑋</mi></math>.&nbsp;<math><mi>∎</mi></math></div><div class="thm-block"><strong><a id="thm-alggeom-variety-principal-open-sets-base" href="#thm-alggeom-variety-principal-open-sets-base" class="thm-anchor">Proposition 6.2.10</a></strong><br><em>Let <math><mi>𝑋</mi></math> be a variety. The (affine) principal open subsets form a base for the topology on <math><mi>𝑋</mi></math>.</em></div><div class="thm-block"><strong><a id="thm-alggeom-abstract-variety-points-are-quasi-closed" href="#thm-alggeom-abstract-variety-points-are-quasi-closed" class="thm-anchor">Proposition 6.2.11 (Varieties are Symmetric)</a></strong><br><em><p>Let <math><mi>𝑋</mi></math> be a variety. Then <math><mi>𝑋</mi></math> is <a href="4.1.6-symmetric-spaces.html#thm-topological-spaces-symmetric">symmetric</a> as a topological space and <math><mover accent="true"><mrow><mo>{</mo><mi>𝑥</mi><mo>}</mo></mrow><mo>―</mo></mover></math> is finite for all <math><mi>𝑥</mi><mo>∈</mo><mi>𝑋</mi></math>. When <math><mi>𝑘</mi></math> is algebraically closed then every point is closed and therefore <math><mi>𝑋</mi></math> is Kolmogorov.</p><p>Furthermore for every open neighbourhood <math><mi>𝑈</mi></math> of <math><mi>𝑥</mi></math> we have <math><mover accent="true"><mrow><mo>{</mo><mi>𝑥</mi><mo>}</mo></mrow><mo>―</mo></mover><mo>=</mo><msub><mo form="prefix" lspace="0em" rspace="0em">cl</mo><mi>𝑈</mi></msub><mrow><mo>(</mo><mrow><mo>{</mo><mi>𝑥</mi><mo>}</mo></mrow><mo>)</mo></mrow></math>.</p></em></div><div><em>Proof.</em> That <math><mi>𝑋</mi></math> is symmetric is from (<a href="4.1.6-symmetric-spaces.html#thm-topological-spaces-quasi-closed-open-cover">4.1.44</a>) and the affine case (<a href="6.1.1-topological-properties.html#thm-alggeom-closure-of-points">6.1.18</a>). The last statement follows from (<a href="4.1.6-symmetric-spaces.html#thm-topological-spaces-quasi-closed-point-closure-neighbourhood">4.1.43</a>), then finiteness follows from the affine case.&nbsp;<math><mi>∎</mi></math></div><div class="thm-block"><strong><a id="thm-alggeom-variety-dimension-zero-subsets" href="#thm-alggeom-variety-dimension-zero-subsets" class="thm-anchor">Proposition 6.2.12 (Closed Subsets of Dimension 0)</a></strong><br><em><p>Let <math><mi>𝑋</mi></math> be a variety and <math><mi>𝑍</mi><mo>⊂</mo><mi>𝑋</mi></math> a closed subset. Then the following are equivalent</p><ol><li><math><mo lspace="0em" rspace="0.16666666666666666em">dim</mo><mi>𝑍</mi><mo>=</mo><mn>0</mn></math></li><li><math><mi>𝑍</mi><mo>=</mo><mover accent="true"><mrow><mo>{</mo><msub><mi>𝑧</mi><mn>1</mn></msub><mo>}</mo></mrow><mo>―</mo></mover><mo>∪</mo><mi>…</mi><mo>∪</mo><mover accent="true"><mrow><mo>{</mo><msub><mi>𝑧</mi><mi>𝑛</mi></msub><mo>}</mo></mrow><mo>―</mo></mover></math> for some <math><msub><mi>𝑧</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>𝑧</mi><mi>𝑛</mi></msub><mo>∈</mo><mi>𝑍</mi></math></li><li><math><mi>𝑍</mi></math> is finite</li></ol></em></div><div><em>Proof.</em> Recall <math><mi>𝑋</mi></math> is Noetherian (<a href="#thm-alggeom-abstract-variety-is-noetherian">6.2.7</a>) and therefore by (<a href="4.1.12-krull-dimension.html#thm-topological-space-dimension-zero-subsets">4.1.91</a>) we have <math><mi>𝑎</mi><mo form="postfix" stretchy="false">)</mo><mo stretchy="false">⟺</mo><mi>𝑏</mi><mo stretchy="false">)</mo></math>. Then <math><mi>𝑏</mi><mo form="postfix" stretchy="false">)</mo><mo stretchy="false">⟹</mo><mi>𝑐</mi><mo stretchy="false">)</mo></math> is (<a href="#thm-alggeom-abstract-variety-points-are-quasi-closed">6.2.11</a>) and conversely if <math><mi>𝑍</mi></math> is finite then <math><mi>𝑍</mi><mo>=</mo><msub><mo form="prefix" lspace="0em">⋃</mo><mrow><mi>𝑧</mi><mo lspace="0em" rspace="0em">∈</mo><mi>𝑍</mi></mrow></msub><mover accent="true"><mrow><mo>{</mo><mi>𝑧</mi><mo>}</mo></mrow><mo>―</mo></mover></math> is a finite union.&nbsp;<math><mi>∎</mi></math></div><div class="thm-block"><strong>Definition 6.2.13 (Separated Variety)</strong><br><em><p>Let <math><mi>𝑋</mi></math> be a variety. Then we say <math><mi>𝑋</mi></math> is <strong>separated</strong> if for every affine variety <math><mi>𝑍</mi></math> and pair of morphisms <math><msub><mi>𝜙</mi><mn>1</mn></msub><mo>,</mo><msub><mi>𝜙</mi><mn>2</mn></msub><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mi>𝑍</mi><mo stretchy="false">⇉</mo><mi>𝑋</mi></math> the equaliser</p><math display="block"><mrow><mo>{</mo><mrow><mi>𝑧</mi><mo>∈</mo><mi>𝑍</mi><mo fence="false" stretchy="true" symmetric="true">|</mo><msub><mi>𝜙</mi><mn>1</mn></msub><mrow><mo>(</mo><mi>𝑧</mi><mo>)</mo></mrow><mo>=</mo><msub><mi>𝜙</mi><mn>2</mn></msub><mrow><mo>(</mo><mi>𝑧</mi><mo>)</mo></mrow></mrow><mo>}</mo></mrow></math><p>is closed in <math><mi>𝑍</mi></math>.</p><p>By (<a href="6.1.3-regular-morphisms-of-affine-varieties.html#thm-alggeom-quasi-affine-equaliser-closed">6.1.43</a>) every affine variety is separated.</p></em></div><div class="thm-block"><strong><a id="thm-alggeom-separated-equaliser-closed" href="#thm-alggeom-separated-equaliser-closed" class="thm-anchor">Proposition 6.2.14</a></strong><br><em>Let <math><mi>𝑋</mi></math> be a separated variety and <math><mi>𝑍</mi></math> a variety. Then the equaliser of any two maps <math><msub><mi>𝜙</mi><mn>1</mn></msub><mo>,</mo><msub><mi>𝜙</mi><mn>2</mn></msub><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mi>𝑍</mi><mo stretchy="false">⇉</mo><mi>𝑋</mi></math> is closed.</em></div><div><em>Proof.</em> By definition <math><mi>𝑍</mi><mo>=</mo><msubsup><mo form="prefix" lspace="0em">⋃</mo><mrow><mi>𝑖</mi><mo lspace="0em" rspace="0em">=</mo><mn>1</mn></mrow><mi>𝑛</mi></msubsup><msub><mi>𝑈</mi><mi>𝑖</mi></msub></math> where <math><msub><mi>𝑈</mi><mi>𝑖</mi></msub></math> is affine. By assumption the equaliser of <math><msub><mi>𝜙</mi><mn>1</mn></msub><msub><mo lspace="0em" rspace="0em">|</mo><msub><mi>𝑈</mi><mi>𝑖</mi></msub></msub><mo>,</mo><msub><mi>𝜙</mi><mn>2</mn></msub><msub><mo lspace="0em" rspace="0em">|</mo><msub><mi>𝑈</mi><mi>𝑖</mi></msub></msub><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><msub><mi>𝑈</mi><mi>𝑖</mi></msub><mo stretchy="false">⇉</mo><mi>𝑋</mi></math> is closed. As a finite union of closed sets is closed, we are done.&nbsp;<math><mi>∎</mi></math></div></div><script>try{parent.postMessage({tocPage:'6.2.1-topological-properties.html'}, '*')}catch(e){}</script><script>document.querySelectorAll('a[href*="#thm-"], a[href*="#bib-"]').forEach(function(a){var pending = null;a.addEventListener('click', function(ev){ev.preventDefault();if (pending) { clearTimeout(pending); pending = null; return; }pending = setTimeout(function(){pending = null;var href = a.getAttribute('href');var hashIdx = href.indexOf('#');var page = hashIdx > 0 ? href.slice(0, hashIdx) : '6.2.1-topological-properties.html';var anchor = href.slice(hashIdx + 1);try{parent.postMessage({openRef:{page:page,anchor:anchor}}, '*')}catch(e){}}, 300);});a.addEventListener('dblclick', function(ev){ev.preventDefault();window.location.href = a.getAttribute('href');});});</script><script>if (window.name === 'ref') {document.body.classList.add('in-ref-panel');var nav = document.querySelector('nav.topbar');if (nav) nav.style.display = 'none';document.querySelectorAll('h1, h2, h3, [id^="thm-"]').forEach(function(el){el.style.scrollMarginTop = '0';});if (location.hash.indexOf('#thm-') === 0) {var target = document.getElementById(location.hash.slice(1));var thmDiv = target ? target.closest('.thm-block') : null;if (thmDiv) {var keep = [thmDiv];var next = thmDiv.nextElementSibling;if (next && next.tagName === 'DIV' && !next.classList.contains('thm-block') && next.textContent.trim().indexOf('Proof.') === 0) {keep.push(next);}var pc = document.querySelector('.page-content');Array.prototype.forEach.call(pc.children, function(child){if (keep.indexOf(child) === -1) child.style.display = 'none';});window.scrollTo(0, 0);}}}</script><script>(function(){function report(){var el = document.querySelector('.page-content');if (!el) return;try{parent.postMessage({contentRight: el.getBoundingClientRect().right}, '*')}catch(e){}}window.addEventListener('resize', report);window.addEventListener('load', report);report();})();</script></body></html>

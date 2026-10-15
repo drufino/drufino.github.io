@@ -63,6 +63,12 @@ html, body {
   background: var(--bg);
   color: var(--fg);
   font-family: system-ui, sans-serif;
+  /* Same vertical-only-scroll guard as content.css's body rule -- the shell
+     itself is just the fixed sidebar/topbar/iframe chrome, which shouldn't
+     ever need to scroll sideways, but a stray wide element (e.g. a long
+     byline on a narrow screen) could otherwise still drag the whole shell
+     horizontally. */
+  overflow-x: hidden;
 }
 
 /* Fixed strip directly above iframe.content (same left/width, and the same
@@ -101,6 +107,18 @@ html, body {
 .topbar-title h2 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Inline SVG instead of a Unicode house glyph (U+2302) -- that character is
+   in the rarely-covered "Miscellaneous Technical" block, and while it
+   rendered fine in desktop testing, Unicode symbol coverage varies enough
+   by platform/font that it isn't something to rely on for an actual
+   navigation affordance (reported missing specifically on mobile). An
+   inline SVG with fill="currentColor" renders identically everywhere and
+   follows the link's own text color automatically. */
+.topbar-title h2 svg.home-icon {
+  vertical-align: -0.1em;
+  flex: none;
 }
 
 .topbar-title p.byline {
@@ -275,17 +293,59 @@ html.sidebar-collapsed .topbar-title {
   width: calc(100% - 5.7rem);
 }
 
+/* Below 760px, .topbar-title's own non-collapsed rule (left: 280px) would
+   run the title into the sidebar, which is wide enough to cover most of a
+   phone screen once open -- give it the same clearance as the collapsed
+   state regardless of whether the sidebar is actually toggled open, since
+   there's no room for both side by side at this width either way. Does NOT
+   touch aside.sidebar/iframe.content themselves: those stay driven purely
+   by the shared html.sidebar-collapsed rules above in every viewport, so
+   the toggle button actually does something on mobile -- an earlier version
+   of this block unconditionally forced aside.sidebar to translateX(-100%)
+   here regardless of that class, which left the sidebar permanently
+   unreachable (no rule anywhere made it visible again once this one
+   applied), i.e. the toggle button did nothing at all below 760px. Mobile
+   still starts collapsed by default -- SHELL_SCRIPT adds the class itself
+   on load when the viewport is already this narrow -- but, unlike before,
+   the class is the ONLY thing deciding that, so toggling it back off
+   actually shows the sidebar again. */
 @media (max-width: 760px) {
-  aside.sidebar {
-    transform: translateX(-100%);
-  }
   .topbar-title {
     left: 5.7rem;
     width: calc(100% - 5.7rem);
   }
-  iframe.content {
-    left: 0;
-    width: 100%;
+  /* The real cause of the missing home icon/title reported on mobile: the
+     byline (p.byline, flex: 0 0 auto -- fixed size, never shrinks) was
+     squeezing the flexible h2 (flex: 0 1 auto, min-width: 0) down to zero
+     width whenever the two together didn't fit, which on a phone-width
+     screen they never did -- h2's own overflow:hidden then made the whole
+     title, home icon included, silently disappear with nothing left to
+     click. Not a font/glyph rendering problem at all (confirmed by
+     screenshot: the h2 itself occupied zero pixels). Fixed by shrinking h2
+     down to icon-only (below), which frees enough room that the byline no
+     longer needs to be hidden outright -- only its email mosaic, which on
+     request stays off mobile (the name is what's wanted there, the
+     obscured-email images are the one part that doesn't fit alongside it,
+     not essential reading on a phone anyway, and still reachable from the
+     sidebar's own copyright line). */
+  .topbar-title p.byline span.contact-mosaic {
+    display: none;
+  }
+  /* Still shrinkable/truncatable as a last resort on a very narrow phone
+     (the fixed flex: 0 0 auto from the base rule above would otherwise
+     just overflow instead of fitting). */
+  .topbar-title p.byline {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* Icon-only home link on mobile -- the full title text (title-text span,
+     split.py's build_shell()) takes real width the byline now needs
+     instead, and the icon alone is already a clear, recognizable,
+     adequately-sized tap target without it. */
+  .topbar-title h2 span.title-text {
+    display: none;
   }
 }
 

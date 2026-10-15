@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>6.2.14 Tangent Space</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><script>
+window.MathJax = {
+  options: { renderActions: { assistiveMml: [] } }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js"></script><link rel="stylesheet" href="content.css"></head><body><script>window.addEventListener('message',function(ev){if(!ev.data||!('theme' in ev.data))return;if(ev.data.theme){document.documentElement.setAttribute('data-theme',ev.data.theme);}else{document.documentElement.removeAttribute('data-theme');}});</script><div class="page-content"><nav class="topbar"><span class="nav-left"><a href="6.2-abstract-varieties.html">&uarr; 6.2</a> &middot; <a href="6.2.13-rational-maps.html">&larr; 6.2.13 Rational Maps</a></span><span class="nav-center current">6.2.14 Tangent Space</span><span class="nav-right"><a href="6.2.15-completeness.html">6.2.15 Completeness &rarr;</a></span></nav><h3 id="loc-305" class="subsection-heading">6.2.14 Tangent Space</h3><div class="thm-block"><strong>Definition 6.2.77</strong><br><em><p>Let <math><mi>𝑋</mi></math> be a variety and <math><mi>𝑊</mi><mo>⊂</mo><mi>𝑋</mi></math> an irreducible subset. Define the <strong>tangent space</strong></p><math display="block"><msub><mi>𝑇</mi><mi>𝑊</mi></msub><mi>𝑋</mi><mo>≔</mo><mo form="prefix" lspace="0em" rspace="0em">Der</mo><mrow><mo>(</mo><mrow><msub><mi>𝒪︀</mi><mrow><mi>𝑋</mi><mo rspace="0em">,</mo><mi>𝑊</mi></mrow></msub><mo>,</mo><mi>𝑘</mi><mrow><mo>(</mo><msub><mi>𝔪</mi><mrow><mi>𝑋</mi><mo rspace="0em">,</mo><mi>𝑊</mi></mrow></msub><mo>)</mo></mrow></mrow><mo>)</mo></mrow></math><p>and the <strong>cotangent space</strong></p><math display="block"><msubsup><mi>𝑇</mi><mi>𝑊</mi><mo>⋆</mo></msubsup><mi>𝑋</mi><mo>≔</mo><mo form="prefix" lspace="0em" rspace="0em">Hom</mo><mrow><mo>(</mo><mrow><msub><mi>𝔪</mi><mrow><mi>𝑋</mi><mo rspace="0em">,</mo><mi>𝑊</mi></mrow></msub><mi>/</mi><msubsup><mi>𝔪</mi><mrow><mi>𝑋</mi><mo rspace="0em">,</mo><mi>𝑊</mi></mrow><mn>2</mn></msubsup><mo>,</mo><mi>𝑘</mi><mrow><mo>(</mo><msub><mi>𝔪</mi><mrow><mi>𝑋</mi><mo rspace="0em">,</mo><mi>𝑊</mi></mrow></msub><mo>)</mo></mrow></mrow><mo>)</mo></mrow></math></em></div><div class="thm-block"><strong>Definition 6.2.78 (Non-Singular Point)</strong><br><em><p>Let <math><mi>𝑋</mi></math> be a variety and <math><mi>𝑊</mi><mo>⊂</mo><mi>𝑋</mi></math> an irreducible subset. Then we say that <math><mi>𝑋</mi></math> is <strong>non-singular</strong> at <math><mi>𝑊</mi></math> if</p><ol><li><math><mi>𝑊</mi></math> is contained in a unique irreducible component <math><msub><mi>𝑋</mi><mi>𝛼</mi></msub></math> (equivalently <math><msub><mi>𝒪︀</mi><mrow><mi>𝑋</mi><mo rspace="0em">,</mo><mi>𝑊</mi></mrow></msub></math> is an integral domain), and</li><li><math><mo lspace="0em" rspace="0.16666666666666666em">dim</mo><msub><mi>𝑇</mi><mi>𝑊</mi></msub><mi>𝑋</mi><mo>=</mo><mo form="prefix" lspace="0em" rspace="0.16666666666666666em">dim</mo><mo form="prefix" lspace="0em" rspace="0em">Der</mo><mrow><mo>(</mo><mrow><mi>𝑘</mi><mrow><mo>(</mo><msub><mi>𝑋</mi><mi>𝛼</mi></msub><mo>)</mo></mrow></mrow><mo>)</mo></mrow></math></li></ol><p>We say that <math><mi>𝑋</mi></math> is non-singular if it is integral and non-singular at all points.</p></em></div><div class="thm-block"><strong>Definition 6.2.79 (Regular Point)</strong><br><em><p>Let <math><mi>𝑋</mi></math> be a variety and <math><mi>𝑊</mi><mo>⊂</mo><mi>𝑋</mi></math> an irreducible subset.</p><p>We say <math><mi>𝑋</mi></math> is <strong>regular</strong> at <math><mi>𝑊</mi></math> if</p><ol><li><math><mi>𝑊</mi></math> is contained in a unique irreducible component <math><msub><mi>𝑋</mi><mi>𝛼</mi></msub></math>, and</li><li><math><mo lspace="0em" rspace="0.16666666666666666em">dim</mo><msub><mi>𝒪︀</mi><mrow><mi>𝑋</mi><mo rspace="0em">,</mo><mi>𝑊</mi></mrow></msub><mo>=</mo><mo form="prefix" lspace="0em" rspace="0.16666666666666666em">dim</mo><msubsup><mi>𝑇</mi><mi>𝑥</mi><mo>⋆</mo></msubsup><mi>𝑋</mi></math></li></ol><p>We say that <math><mi>𝑋</mi></math> is regular if it is integral and regular at all points.</p></em></div><div class="thm-block"><strong>Proposition 6.2.80 (Regularity / Non-Singularity is a local property)</strong><br><em><p>Let <math><mi>𝑋</mi></math> be a variety, <math><mi>𝑊</mi><mo>⊂</mo><mi>𝑋</mi></math> an irreducible subset and <math><mi>𝑈</mi><mo>⊂</mo><mi>𝑋</mi></math> an open subset such that <math><mi>𝑈</mi><mo>∩</mo><mi>𝑊</mi><mo>≠</mo><mi>∅</mi></math>. Then there is a canonical isomorphism</p><math display="block"><msub><mi>𝑇</mi><mi>𝑊</mi></msub><mi>𝑋</mi><mover><mo stretchy="false">→</mo><mo>∼</mo></mover><msub><mi>𝑇</mi><mrow><mi>𝑊</mi><mo lspace="0em" rspace="0em">∩</mo><mi>𝑈</mi></mrow></msub><mi>𝑈</mi><mi>.</mi></math><p><math><mi>𝑋</mi></math> is regular (resp. non-singular) at <math><mi>𝑊</mi></math> if and only if <math><mi>𝑈</mi></math> is regular (resp. non-singular) at <math><mi>𝑈</mi><mo>∩</mo><mi>𝑊</mi></math>.</p></em></div><div class="thm-block"><strong>Proposition 6.2.81</strong><br><em>Let <math><mi>𝑋</mi></math> be an integral variety. Then it is regular (resp. non-singular) if it has a regular (resp. non-singular) open cover.</em></div><div class="thm-block"><strong><a id="thm-alggeom-non-singular-is-regular" href="#thm-alggeom-non-singular-is-regular" class="thm-anchor">Proposition 6.2.82</a></strong><br><em><p>Let <math><mi>𝑋</mi></math> be a variety and <math><mi>𝑊</mi><mo>⊂</mo><mi>𝑋</mi></math> an irreducible subset such that <math><mi>𝑘</mi><mrow><mo>(</mo><msub><mi>𝔪</mi><mrow><mi>𝑋</mi><mo rspace="0em">,</mo><mi>𝑊</mi></mrow></msub><mo>)</mo></mrow><mi>/</mi><mi>𝑘</mi></math> is <strong>separably generated</strong> (e.g. <math><mi>𝑘</mi></math> perfect). Then there is a canonical isomorphism</p><math display="block"><msub><mi>𝑇</mi><mi>𝑊</mi></msub><mi>𝑋</mi><mover><mo stretchy="false">⟶</mo><mo>∼</mo></mover><msubsup><mi>𝑇</mi><mi>𝑊</mi><mo>⋆</mo></msubsup><mi>𝑊</mi></math><p>In particular when <math><mi>𝑊</mi></math> is contained in a unique irreducible component we have <strong>regular</strong> <math><mo lspace="0em" rspace="0em" stretchy="false">⟺</mo></math> <strong>non-singular</strong>.</p></em></div></div><script>try{parent.postMessage({tocPage:'6.2.14-tangent-space.html'}, '*')}catch(e){}</script><script>document.querySelectorAll('a[href*="#thm-"], a[href*="#bib-"]').forEach(function(a){var pending = null;a.addEventListener('click', function(ev){ev.preventDefault();if (pending) { clearTimeout(pending); pending = null; return; }pending = setTimeout(function(){pending = null;var href = a.getAttribute('href');var hashIdx = href.indexOf('#');var page = hashIdx > 0 ? href.slice(0, hashIdx) : '6.2.14-tangent-space.html';var anchor = href.slice(hashIdx + 1);try{parent.postMessage({openRef:{page:page,anchor:anchor}}, '*')}catch(e){}}, 300);});a.addEventListener('dblclick', function(ev){ev.preventDefault();window.location.href = a.getAttribute('href');});});</script><script>if (window.name === 'ref') {document.body.classList.add('in-ref-panel');var nav = document.querySelector('nav.topbar');if (nav) nav.style.display = 'none';document.querySelectorAll('h1, h2, h3, [id^="thm-"]').forEach(function(el){el.style.scrollMarginTop = '0';});if (location.hash.indexOf('#thm-') === 0) {var target = document.getElementById(location.hash.slice(1));var thmDiv = target ? target.closest('.thm-block') : null;if (thmDiv) {var keep = [thmDiv];var next = thmDiv.nextElementSibling;if (next && next.tagName === 'DIV' && !next.classList.contains('thm-block') && next.textContent.trim().indexOf('Proof.') === 0) {keep.push(next);}var pc = document.querySelector('.page-content');Array.prototype.forEach.call(pc.children, function(child){if (keep.indexOf(child) === -1) child.style.display = 'none';});window.scrollTo(0, 0);}}}</script><script>(function(){function report(){var el = document.querySelector('.page-content');if (!el) return;try{parent.postMessage({contentRight: el.getBoundingClientRect().right}, '*')}catch(e){}}window.addEventListener('resize', report);window.addEventListener('load', report);report();})();</script></body></html>

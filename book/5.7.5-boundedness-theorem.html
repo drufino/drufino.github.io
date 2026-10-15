@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>5.7.5 Boundedness Theorem</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><script>
+window.MathJax = {
+  options: { renderActions: { assistiveMml: [] } }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js"></script><link rel="stylesheet" href="content.css"></head><body><script>window.addEventListener('message',function(ev){if(!ev.data||!('theme' in ev.data))return;if(ev.data.theme){document.documentElement.setAttribute('data-theme',ev.data.theme);}else{document.documentElement.removeAttribute('data-theme');}});</script><div class="page-content"><nav class="topbar"><span class="nav-left"><a href="5.7-real-analysis.html">&uarr; 5.7</a> &middot; <a href="5.7.4-bolzano-weierstrass-theorem.html">&larr; 5.7.4 Bolzano-Weierstrass Theorem</a></span><span class="nav-center current">5.7.5 Boundedness Theorem</span><span class="nav-right"><a href="5.7.6-intermediate-value-theorem.html">5.7.6 Intermediate Value Theorem &rarr;</a></span></nav><h3 id="loc-244" class="subsection-heading">5.7.5 Boundedness Theorem</h3><div class="thm-block"><strong><a id="thm-analysis-boundedness-theorem" href="#thm-analysis-boundedness-theorem" class="thm-anchor">Proposition 5.7.8</a></strong><br><em>Let <math><mi>𝑋</mi></math> be a compact topological space and <math><mi>𝑓</mi><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mi>𝑋</mi><mo stretchy="false">→</mo><msup><mi>ℝ</mi><mi>𝑘</mi></msup></math> be a continuous function. Then <math><mi>𝑓</mi></math> is bounded and attains its bounds.</em></div><div><p><em><strong>Proof 1.</strong>.</em> We may prove directly the case <math><mi>𝑋</mi><mo>=</mo><mrow><mo>[</mo><mrow><mi>𝑎</mi><mo>,</mo><mi>𝑏</mi></mrow><mo>]</mo></mrow></math> and <math><mi>𝑘</mi><mo>=</mo><mn>1</mn></math>.</p><p>Suppose <math><mi>𝑓</mi></math> is not bounded, then there is some sequence <math><mrow><mo>(</mo><msub><mi>𝑥</mi><mi>𝑛</mi></msub><mo>)</mo></mrow></math> in <math><mi>𝑋</mi></math> such that <math><mrow><mo>|</mo><mrow><mi>𝑓</mi><mrow><mo>(</mo><msub><mi>𝑥</mi><mi>𝑛</mi></msub><mo>)</mo></mrow></mrow><mo>|</mo></mrow><mo>≥</mo><mi>𝑛</mi></math>. By choosing a convergent subsequence (<a href="5.7.4-bolzano-weierstrass-theorem.html#thm-bolzano-weierstrass">5.7.5</a>) we may assume that <math><msub><mi>𝑥</mi><mi>𝑛</mi></msub><mo stretchy="false">→</mo><mi>𝑥</mi></math>. Further <math><mi>𝑋</mi></math> is closed so <math><mi>𝑥</mi><mo>∈</mo><mi>𝑋</mi></math> (<a href="4.1.2-closure.html#thm-topologicalclosure">4.1.19</a>). By continuity (<a href="5.4.3-convergent-sequences.html#thm-continuous-image-of-convergent-sequence">5.4.13</a>) <math><mi>𝑓</mi><mrow><mo>(</mo><msub><mi>𝑥</mi><mi>𝑛</mi></msub><mo>)</mo></mrow><mo stretchy="false">→</mo><mi>𝑓</mi><mrow><mo>(</mo><mi>𝑥</mi><mo>)</mo></mrow></math>. Choose <math><msub><mi>𝑁</mi><mn>1</mn></msub><mo>></mo><mrow><mo>|</mo><mrow><mi>𝑓</mi><mrow><mo>(</mo><mi>𝑥</mi><mo>)</mo></mrow></mrow><mo>|</mo></mrow></math> and <math><msub><mi>𝑁</mi><mn>2</mn></msub></math> such that <math><mi>𝑛</mi><mo>≥</mo><msub><mi>𝑁</mi><mn>2</mn></msub><mo stretchy="false">⟹</mo><mrow><mo>|</mo><mrow><mi>𝑓</mi><mrow><mo>(</mo><msub><mi>𝑥</mi><mi>𝑛</mi></msub><mo>)</mo></mrow><mo>−</mo><mi>𝑓</mi><mrow><mo>(</mo><mi>𝑥</mi><mo>)</mo></mrow></mrow><mo>|</mo></mrow><mo>&lt;</mo><msub><mi>𝑁</mi><mn>1</mn></msub><mo>−</mo><mrow><mo>|</mo><mrow><mi>𝑓</mi><mrow><mo>(</mo><mi>𝑥</mi><mo>)</mo></mrow></mrow><mo>|</mo></mrow><mo stretchy="false">⟹</mo><mrow><mo>|</mo><mrow><mi>𝑓</mi><mrow><mo>(</mo><msub><mi>𝑥</mi><mi>𝑛</mi></msub><mo>)</mo></mrow></mrow><mo>|</mo></mrow><mo>&lt;</mo><msub><mi>𝑁</mi><mn>1</mn></msub></math>. Then <math><mi>𝑛</mi><mo>≔</mo><mo form="prefix" lspace="0em" rspace="0em">max</mo><mrow><mo>(</mo><mrow><msub><mi>𝑁</mi><mn>1</mn></msub><mo>,</mo><msub><mi>𝑁</mi><mn>2</mn></msub></mrow><mo>)</mo></mrow><mo stretchy="false">⟹</mo><mrow><mo>|</mo><mrow><mi>𝑓</mi><mrow><mo>(</mo><msub><mi>𝑥</mi><mi>𝑛</mi></msub><mo>)</mo></mrow></mrow><mo>|</mo></mrow><mo>&lt;</mo><msub><mi>𝑁</mi><mn>1</mn></msub></math> and <math><mrow><mo>|</mo><mrow><mi>𝑓</mi><mrow><mo>(</mo><msub><mi>𝑥</mi><mi>𝑛</mi></msub><mo>)</mo></mrow></mrow><mo>|</mo></mrow><mo>></mo><msub><mi>𝑁</mi><mn>1</mn></msub></math> a contradiction.&nbsp;<math><mi>∎</mi></math></p></div><div><p><em><strong>Proof 2.</strong>.</em> We may reduce to the case <math><mi>𝑘</mi><mo>=</mo><mn>1</mn></math> by considering the composition with the norm <math><mrow><mo>‖</mo><mo lspace="0em" rspace="0em">⋅</mo><mo>‖</mo></mrow></math>.</p><p>By (<a href="4.1.14-quasi-compactness.html#thm-topology-continuous-image-of-compact-space">4.1.109</a>) (or (<a href="4.1.14-quasi-compactness.html#thm-topology-continuous-image-of-sequentially-compact-space">4.1.112</a>)) <math><mi>𝑓</mi><mrow><mo>(</mo><mi>𝑋</mi><mo>)</mo></mrow></math> is (sequentially) compact. Then by (<a href="5.7.4-bolzano-weierstrass-theorem.html#thm-analysis-closed-bound-intervals-are-compact">5.7.7</a>) <math><mi>𝑓</mi><mrow><mo>(</mo><mi>𝑋</mi><mo>)</mo></mrow></math> is closed and bounded.</p><p>Let <math><mi>𝑦</mi><mo>=</mo><mo form="prefix" lspace="0em" rspace="0.16666666666666666em">sup</mo><mi>𝑓</mi><mrow><mo>(</mo><mi>𝑋</mi><mo>)</mo></mrow></math>. By (<a href="5.1.1-sequences-in-an-ordered-field.html#thm-sup-has-convergent-sequence">5.1.18</a>) there exists <math><msub><mi>𝑦</mi><mi>𝑛</mi></msub><mo stretchy="false">→</mo><mi>𝑦</mi></math> with <math><msub><mi>𝑦</mi><mi>𝑛</mi></msub><mo>∈</mo><mi>𝑓</mi><mrow><mo>(</mo><mi>𝑋</mi><mo>)</mo></mrow></math>. Since <math><mi>𝑓</mi><mrow><mo>(</mo><mi>𝑋</mi><mo>)</mo></mrow></math> is closed we see <math><mi>𝑦</mi><mo>∈</mo><mi>𝑓</mi><mrow><mo>(</mo><mi>𝑋</mi><mo>)</mo></mrow></math> by (<a href="4.1.2-closure.html#thm-topologicalclosure">4.1.19</a>) as required.&nbsp;<math><mi>∎</mi></math></p></div></div><script>try{parent.postMessage({tocPage:'5.7.5-boundedness-theorem.html'}, '*')}catch(e){}</script><script>document.querySelectorAll('a[href*="#thm-"], a[href*="#bib-"]').forEach(function(a){var pending = null;a.addEventListener('click', function(ev){ev.preventDefault();if (pending) { clearTimeout(pending); pending = null; return; }pending = setTimeout(function(){pending = null;var href = a.getAttribute('href');var hashIdx = href.indexOf('#');var page = hashIdx > 0 ? href.slice(0, hashIdx) : '5.7.5-boundedness-theorem.html';var anchor = href.slice(hashIdx + 1);try{parent.postMessage({openRef:{page:page,anchor:anchor}}, '*')}catch(e){}}, 300);});a.addEventListener('dblclick', function(ev){ev.preventDefault();window.location.href = a.getAttribute('href');});});</script><script>if (window.name === 'ref') {document.body.classList.add('in-ref-panel');var nav = document.querySelector('nav.topbar');if (nav) nav.style.display = 'none';document.querySelectorAll('h1, h2, h3, [id^="thm-"]').forEach(function(el){el.style.scrollMarginTop = '0';});if (location.hash.indexOf('#thm-') === 0) {var target = document.getElementById(location.hash.slice(1));var thmDiv = target ? target.closest('.thm-block') : null;if (thmDiv) {var keep = [thmDiv];var next = thmDiv.nextElementSibling;if (next && next.tagName === 'DIV' && !next.classList.contains('thm-block') && next.textContent.trim().indexOf('Proof.') === 0) {keep.push(next);}var pc = document.querySelector('.page-content');Array.prototype.forEach.call(pc.children, function(child){if (keep.indexOf(child) === -1) child.style.display = 'none';});window.scrollTo(0, 0);}}}</script><script>(function(){function report(){var el = document.querySelector('.page-content');if (!el) return;try{parent.postMessage({contentRight: el.getBoundingClientRect().right}, '*')}catch(e){}}window.addEventListener('resize', report);window.addEventListener('load', report);report();})();</script></body></html>
