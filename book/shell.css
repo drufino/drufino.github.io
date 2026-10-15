@@ -156,6 +156,18 @@ html, body {
   color: var(--muted);
 }
 
+.topbar-title p.byline a.cross-edition {
+  color: var(--link);
+  font-weight: 400;
+  text-decoration: none;
+  padding-left: 0.5rem;
+  border-left: 1px solid var(--border);
+}
+
+.topbar-title p.byline a.cross-edition:hover {
+  text-decoration: underline;
+}
+
 aside.sidebar {
   position: fixed;
   top: 2.6rem;
@@ -332,8 +344,10 @@ html.sidebar-collapsed .topbar-title {
      longer needs to be hidden outright -- only its email mosaic, which on
      request stays off mobile (the name is what's wanted there, the
      obscured-email images are the one part that doesn't fit alongside it,
-     not essential reading on a phone anyway, and still reachable from the
-     sidebar's own copyright line). */
+     not essential reading on a phone anyway). The cross-edition link
+     (a.cross-edition, right after the mosaic) still fits and stays
+     visible -- short enough ("Offline edition") not to need its own
+     mobile-specific treatment. */
   .topbar-title p.byline span.contact-mosaic {
     display: none;
   }
