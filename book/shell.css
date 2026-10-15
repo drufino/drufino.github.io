@@ -169,6 +169,12 @@ aside.sidebar {
   background: var(--bg);
   color: var(--fg);
   transition: transform 0.2s;
+  /* Explicit (not auto) so it reliably paints above .sidebar-backdrop's
+     z-index: 9 below -- a position:fixed element with z-index:auto doesn't
+     establish its own stacking context, so it would otherwise always paint
+     BEHIND any sibling that has an explicit z-index, regardless of DOM
+     order or which value looks "lower" at a glance. */
+  z-index: 10;
 }
 
 aside.sidebar p.copyright {
@@ -347,6 +353,32 @@ html.sidebar-collapsed .topbar-title {
   .topbar-title h2 span.title-text {
     display: none;
   }
+  /* Overlay, not push: below 760px the sidebar floats on top of the iframe
+     (which stays full-width) instead of sharing the screen with it -- the
+     base rule's left: 280px push left only a sliver for actual reading on
+     a typical phone width. aside.sidebar's own width (280px, unchanged)
+     still only covers part of the screen in this state, which is what
+     makes an overlay model make sense here instead of just clipping. */
+  iframe.content {
+    left: 0 !important;
+    width: 100% !important;
+  }
+  /* Tap-outside-to-close backdrop, shown only while the sidebar is open on
+     a narrow viewport -- sits between the sidebar (implicit stacking order,
+     later in the DOM) and the iframe (default stacking), dimming the
+     content so "floats on top of" reads as a real overlay. Tapping it
+     collapses the sidebar, same gesture as the offline book's. */
+  html:not(.sidebar-collapsed) .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 9;
+  }
+}
+
+.sidebar-backdrop {
+  display: none;
 }
 
 /* Right-hand preview panel -- opened by clicking a theorem citation (see
