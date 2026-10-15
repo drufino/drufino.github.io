@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>3.1 Magmas and Monoids</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><script>
+window.MathJax = {
+  options: { renderActions: { assistiveMml: [] } }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js"></script><link rel="stylesheet" href="content.css"></head><body><script>window.addEventListener('message',function(ev){if(!ev.data||!('theme' in ev.data))return;if(ev.data.theme){document.documentElement.setAttribute('data-theme',ev.data.theme);}else{document.documentElement.removeAttribute('data-theme');}});</script><div class="page-content"><nav class="topbar"><span class="nav-left"><a href="3-algebra.html">&uarr; 3</a><a href="3-algebra.html">&larr; 3 Algebra</a></span><span class="nav-center current">3.1 Magmas and Monoids</span><span class="nav-right"><a href="3.2-groups.html">3.2 Groups &rarr;</a></span></nav><h2 id="loc-49" class="section-heading">3.1 Magmas and Monoids</h2><div class="thm-block"><strong>Definition 3.1.1 (Magma)</strong><br><em><p>Let <math><mi>𝑋</mi></math> be a set. A <strong>law of composition</strong> on <math><mi>𝑋</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mi>𝑋</mi></math> is a function</p><math display="block"><mo form="infix" lspace="0em" rspace="0em">⋅</mo><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mi>𝑋</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">×</mo><mi>𝑋</mi><mo stretchy="false">→</mo><mi>𝑋</mi></math><p>and we typically write the composition of <math><mi>𝑥</mi><mo>,</mo><mi>𝑦</mi><mo>∈</mo><mi>𝑋</mi></math> as either</p><math display="block"><mi>𝑥</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑦</mi></math><p>or <math><mi>𝑥</mi><mi>𝑦</mi></math>, or <math><mi>𝑥</mi><mo>+</mo><mi>𝑦</mi></math> in the commutative case.</p><p>A pair <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> consisting of a set <math><mi>𝑋</mi></math> and law of composition on <math><mi>𝑋</mi></math> is called a <strong>magma</strong>.</p></em></div><div class="thm-block"><strong><a id="thm-monoid" href="#thm-monoid" class="thm-anchor">Definition 3.1.2 (Magma/Monoid)</a></strong><br><em><p>A <strong>magma</strong> <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> is said to be</p><ul><li><strong>associative</strong> if <math><mrow><mo>(</mo><mrow><mi>𝑥</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑦</mi></mrow><mo>)</mo></mrow><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑧</mi><mo>=</mo><mi>𝑥</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mrow><mo>(</mo><mrow><mi>𝑦</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑧</mi></mrow><mo>)</mo></mrow></math></li><li><strong>commutative</strong> if <math><mi>𝑥</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑦</mi><mo>=</mo><mi>𝑦</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑥</mi></math> for all <math><mi>𝑥</mi><mo>,</mo><mi>𝑦</mi><mo>∈</mo><mi>𝑋</mi></math></li><li><strong>unital</strong> if there exists <math><mi>𝑒</mi><mo>∈</mo><mi>𝑋</mi></math> such that <math><mi>𝑒</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑥</mi><mo>=</mo><mi>𝑥</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑒</mi><mo>=</mo><mi>𝑥</mi></math> for all <math><mi>𝑥</mi><mo>∈</mo><mi>𝑋</mi></math>. Such an <math><mi>𝑒</mi></math> is called an <strong>identity</strong>.</li><li>a <strong>monoid</strong> if it is both <strong>associative</strong> and <strong>unital</strong></li></ul></em></div><div class="thm-block"><strong>Proposition 3.1.3 (Identity is Unique)</strong><br><em><p>A magma <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> has at most one element <math><mi>𝑒</mi></math> such that</p><math display="block"><mi>𝑥</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑒</mi><mo>=</mo><mi>𝑒</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑥</mi><mo>=</mo><mi>𝑥</mi></math><p>for all <math><mi>𝑥</mi><mo>∈</mo><mi>𝑋</mi></math>.</p></em></div><div class="thm-block"><strong>Definition 3.1.4 (Invertible / Monoid)</strong><br><em><p>Let <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> be a unital magma. An element <math><mi>𝑥</mi><mo>∈</mo><mi>𝑋</mi></math> is <strong>invertible</strong> if there exists <math><mi>𝑦</mi><mo>∈</mo><mi>𝑋</mi></math> such that</p><math display="block"><mi>𝑥</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑦</mi><mo>=</mo><mi>𝑦</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝑥</mi><mo>=</mo><mi>𝑒</mi></math></em></div><div class="thm-block"><strong><a id="thm-inversesareunique" href="#thm-inversesareunique" class="thm-anchor">Proposition 3.1.5 (Inverses are unique)</a></strong><br><em>Let <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> be a monoid. If <math><mi>𝑥</mi><mo>∈</mo><mi>𝑋</mi></math> is invertible then its inverse is unique and denoted <math><msup><mi>𝑥</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></math>.</em></div><div><p><em>Proof.</em> Suppose that <math><mi>𝑥</mi><mi>𝑦</mi><mo>=</mo><mi>𝑥</mi><msup><mi>𝑦</mi><mo>′</mo></msup><mo>=</mo><mi>𝑒</mi><mo>=</mo><mi>𝑦</mi><mi>𝑥</mi><mo>=</mo><msup><mi>𝑦</mi><mo>′</mo></msup><mi>𝑥</mi></math>. Then</p><math display="block"><mi>𝑥</mi><mi>𝑦</mi><mo>=</mo><mi>𝑒</mi><mo stretchy="false">⟹</mo><msup><mi>𝑦</mi><mo>′</mo></msup><mrow><mo>(</mo><mrow><mi>𝑥</mi><mi>𝑦</mi></mrow><mo>)</mo></mrow><mo>=</mo><msup><mi>𝑦</mi><mo>′</mo></msup><mi>𝑒</mi><mo>=</mo><msup><mi>𝑦</mi><mo>′</mo></msup><mo stretchy="false">⟹</mo><mrow><mo>(</mo><mrow><msup><mi>𝑦</mi><mo>′</mo></msup><mi>𝑥</mi></mrow><mo>)</mo></mrow><mi>𝑦</mi><mo>=</mo><msup><mi>𝑦</mi><mo>′</mo></msup><mo stretchy="false">⟹</mo><mi>𝑦</mi><mo>=</mo><msup><mi>𝑦</mi><mo>′</mo></msup></math><p>&nbsp;<math><mi>∎</mi></math></p></div><div class="thm-block"><strong>Definition 3.1.6 (Homomorphism)</strong><br><em><p>Let <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math>, <math><mrow><mo>(</mo><mrow><mi>𝑌</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> be magmas. Then a function <math><mi>𝜑</mi><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mi>𝑋</mi><mo stretchy="false">→</mo><mi>𝑌</mi></math> is said to be a <strong>magma homomorphism</strong> if it satisfies</p><math display="block"><mi>𝜑</mi><mrow><mo>(</mo><mrow><msub><mi>𝑥</mi><mn>1</mn></msub><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><msub><mi>𝑥</mi><mn>2</mn></msub></mrow><mo>)</mo></mrow><mo>=</mo><mi>𝜑</mi><mrow><mo>(</mo><msub><mi>𝑥</mi><mn>1</mn></msub><mo>)</mo></mrow><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">⋅</mo><mi>𝜑</mi><mrow><mo>(</mo><msub><mi>𝑥</mi><mn>2</mn></msub><mo>)</mo></mrow><mspace width="1em"/><mo form="prefix">∀</mo><msub><mi>𝑥</mi><mn>1</mn></msub><mo>,</mo><msub><mi>𝑥</mi><mn>2</mn></msub><mo>∈</mo><mi>𝑋</mi></math><p>If <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> and <math><mrow><mo>(</mo><mrow><mi>𝑌</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> are unital then <math><mi>𝜑</mi></math> is <strong>unital</strong> if</p><math display="block"><mi>𝜑</mi><mrow><mo>(</mo><msub><mi>𝑒</mi><mi>𝑋</mi></msub><mo>)</mo></mrow><mo>=</mo><msub><mi>𝑒</mi><mi>𝑌</mi></msub></math><p>If <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> and <math><mrow><mo>(</mo><mrow><mi>𝑌</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> are monoids then <math><mi>𝜑</mi></math> is a <strong>monoid morphism</strong> if it satisfies both these conditions.</p></em></div><div class="thm-block"><strong>Proposition 3.1.7 (<math><mi>ℕ</mi></math> is an initial object)</strong><br><em><p>Let <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> be a monoid and <math><mi>𝑥</mi><mo>∈</mo><mi>𝑋</mi></math>. Then there is a unique monoid morphism</p><math display="block"><msup><mi>𝑥</mi><mrow><mo>(</mo><mo form="prefix">−</mo><mo>)</mo></mrow></msup><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mrow><mo>(</mo><mrow><mi>ℕ</mi><mo>,</mo><mo form="prefix">+</mo></mrow><mo>)</mo></mrow><mo stretchy="false">→</mo><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math><p>such that</p><math display="block"><msup><mi>𝑥</mi><mn>1</mn></msup><mo>=</mo><mi>𝑥</mi></math><p>Furthermore if <math><mi>𝜑</mi><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow><mo stretchy="false">→</mo><mrow><mo>(</mo><mrow><mi>𝑌</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> is a monoid morphism then</p><math display="block"><mi>𝜑</mi><mrow><mo>(</mo><msup><mi>𝑥</mi><mi>𝑛</mi></msup><mo>)</mo></mrow><mo>=</mo><msup><mrow><mi>𝜑</mi><mrow><mo>(</mo><mi>𝑥</mi><mo>)</mo></mrow></mrow><mi>𝑛</mi></msup></math><p>for all <math><mi>𝑥</mi><mo>∈</mo><mi>𝑋</mi></math> and <math><mi>𝑥</mi><mo>∈</mo><mi>ℕ</mi></math>.</p></em></div><div class="thm-block"><strong>Proposition 3.1.8 (<math><mi>ℤ</mi></math> is an initial object)</strong><br><em><p>Let <math><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> be a monoid and <math><mi>𝑥</mi><mo>∈</mo><mi>𝑋</mi></math> be an invertible element. Then there is a unique monoid morphism</p><math display="block"><msup><mi>𝑥</mi><mrow><mo>(</mo><mo form="prefix">−</mo><mo>)</mo></mrow></msup><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mrow><mo>(</mo><mrow><mi>ℤ</mi><mo>,</mo><mo form="prefix">+</mo></mrow><mo>)</mo></mrow><mo stretchy="false">→</mo><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math><p>such that</p><math display="block"><msup><mi>𝑥</mi><mn>1</mn></msup><mo>=</mo><mi>𝑥</mi></math><p>and</p><math display="block"><msup><mi>𝑥</mi><mrow><mo>−</mo><mi>𝑛</mi></mrow></msup><mspace width="0.2222em"/><mtext>is the inverse of</mtext><mspace width="0.2222em"/><msup><mi>𝑥</mi><mi>𝑛</mi></msup></math><p>Furthermore if <math><mi>𝜑</mi><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mrow><mo>(</mo><mrow><mi>𝑋</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow><mo stretchy="false">→</mo><mrow><mo>(</mo><mrow><mi>𝑌</mi><mo>,</mo><mo form="infix" lspace="0em" rspace="0em">⋅</mo></mrow><mo>)</mo></mrow></math> is monoid morphism then</p><math display="block"><mi>𝜑</mi><mrow><mo>(</mo><msup><mi>𝑥</mi><mi>𝑛</mi></msup><mo>)</mo></mrow><mo>=</mo><msup><mrow><mi>𝜑</mi><mrow><mo>(</mo><mi>𝑥</mi><mo>)</mo></mrow></mrow><mi>𝑛</mi></msup></math><p>for all <math><mi>𝑥</mi><mo>∈</mo><mi>𝑋</mi></math> invertible and <math><mi>𝑛</mi><mo>∈</mo><mi>ℤ</mi></math>.</p></em></div></div><script>try{parent.postMessage({tocPage:'3.1-magmas-and-monoids.html'}, '*')}catch(e){}</script><script>document.querySelectorAll('a[href*="#thm-"], a[href*="#bib-"]').forEach(function(a){var pending = null;a.addEventListener('click', function(ev){ev.preventDefault();if (pending) { clearTimeout(pending); pending = null; return; }pending = setTimeout(function(){pending = null;var href = a.getAttribute('href');var hashIdx = href.indexOf('#');var page = hashIdx > 0 ? href.slice(0, hashIdx) : '3.1-magmas-and-monoids.html';var anchor = href.slice(hashIdx + 1);try{parent.postMessage({openRef:{page:page,anchor:anchor}}, '*')}catch(e){}}, 300);});a.addEventListener('dblclick', function(ev){ev.preventDefault();window.location.href = a.getAttribute('href');});});</script><script>if (window.name === 'ref') {document.body.classList.add('in-ref-panel');var nav = document.querySelector('nav.topbar');if (nav) nav.style.display = 'none';document.querySelectorAll('h1, h2, h3, [id^="thm-"]').forEach(function(el){el.style.scrollMarginTop = '0';});if (location.hash.indexOf('#thm-') === 0) {var target = document.getElementById(location.hash.slice(1));var thmDiv = target ? target.closest('.thm-block') : null;if (thmDiv) {var keep = [thmDiv];var next = thmDiv.nextElementSibling;if (next && next.tagName === 'DIV' && !next.classList.contains('thm-block') && next.textContent.trim().indexOf('Proof.') === 0) {keep.push(next);}var pc = document.querySelector('.page-content');Array.prototype.forEach.call(pc.children, function(child){if (keep.indexOf(child) === -1) child.style.display = 'none';});window.scrollTo(0, 0);}}}</script><script>(function(){function report(){var el = document.querySelector('.page-content');if (!el) return;try{parent.postMessage({contentRight: el.getBoundingClientRect().right}, '*')}catch(e){}}window.addEventListener('resize', report);window.addEventListener('load', report);report();})();</script></body></html>
