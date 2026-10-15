@@ -566,6 +566,13 @@ nav.topbar {
   position: fixed !important;
   top: var(--sidebar-header-h) !important;
   left: 280px; right: 0;
+  /* .page-content (content.css) caps the actual reading column at
+     max-width: 52rem -- on a wide monitor, everything past that is just
+     blank space to the right of the real text, which the navbar (fixed,
+     so it can no longer inherit that cap through normal in-flow sizing
+     the way the multi-page site's sticky version does) was stretching
+     across too, visibly wider than the column it belongs to. */
+  max-width: 52rem;
   margin: 0 !important;
   z-index: 8;
   box-sizing: border-box;
