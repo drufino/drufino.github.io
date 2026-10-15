@@ -433,39 +433,22 @@ aside.ref-panel.open {
 .ref-panel-header {
   flex: 0 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 0.4rem;
   border-bottom: 1px solid var(--border);
 }
 
-/* Back/forward step through THIS panel's own preview history (the iframe's
-   own history, accumulated as its src is reassigned on each citation click)
-   -- independent of the main reading pane's navigation. */
-button.ref-panel-back,
-button.ref-panel-forward,
 button.ref-panel-close {
   background: none;
   border: none;
   cursor: pointer;
   color: var(--muted);
-}
-
-button.ref-panel-back,
-button.ref-panel-forward {
-  font-size: 1.1rem;
-  line-height: 1;
-  padding: 0.2rem 0.4rem;
-}
-
-button.ref-panel-close {
   font-size: 1.3rem;
   line-height: 1;
   padding: 0.2rem 0.5rem;
 }
 
-button.ref-panel-back:hover,
-button.ref-panel-forward:hover,
 button.ref-panel-close:hover {
   color: var(--fg);
 }
