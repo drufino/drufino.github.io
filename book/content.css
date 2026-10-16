@@ -369,11 +369,12 @@ nav.topbar .nav-left {
 }
 
 nav.topbar .nav-center {
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
   justify-self: center;
   min-width: 0;
   max-width: 100%;
-  overflow: hidden;
 }
 
 nav.topbar .nav-right {
@@ -396,10 +397,26 @@ nav.topbar .current {
   font-weight: 600;
   white-space: nowrap;
   display: inline-block;
+  min-width: 0;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: bottom;
+}
+
+/* Per-section PDF-fragment badge (see split.py's pdf_fragment_href/
+   build_navbar) -- a small bordered "PDF" pill next to the section title,
+   opening a standalone PDF of just this section in a new tab. flex-shrink:
+   0 keeps it from being squeezed (or cut off by .current's own ellipsis)
+   when the title is long; .current handles its own truncation instead. */
+.pdf-frag-badge {
+  flex-shrink: 0;
+  font-size: 0.75em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--link);
+  border-radius: 4px;
+  padding: 0.05em 0.4em;
 }
 
 /* Theorem label permalinks (see wrap_theorem_labels()) -- look identical to
