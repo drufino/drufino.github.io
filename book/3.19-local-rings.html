@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>3.19 Local Rings</title><style>/* Alignment */
+mtable.right-align mtd,
+mtable mtd.right-align,
+mtable.left-align mtd.right-align,
+mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+mtable.cases mtd,
+mtable.left-align mtd,
+mtable mtd.left-align,
+mtable.aligned mtd:nth-child(even),
+math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.left-flush {
+  padding-left: 0;
+}
+mtable.cases mtd,
+mtable.aligned mtd,
+mtable mtd.flushed,
+mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+mtable {
+  math-style: inherit;
+}
+mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Other rules for scriptlevel, displaystyle and math-shift */
+munder > :nth-child(2),
+munderover > :nth-child(2) {
+  math-shift: compact
+}
+munder[accentunder="true" i] > :not(:first-child),
+mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}</style><script>
+window.MathJax = {
+  options: { renderActions: { assistiveMml: [] } }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js"></script><link rel="stylesheet" href="content.css"></head><body><script>window.addEventListener('message',function(ev){if(!ev.data||!('theme' in ev.data))return;if(ev.data.theme){document.documentElement.setAttribute('data-theme',ev.data.theme);}else{document.documentElement.removeAttribute('data-theme');}});</script><div class="page-content"><nav class="topbar"><span class="nav-left"><a href="3-algebra.html">&uarr; 3</a> &middot; <a href="3.18.18-separating-transcendence-base.html">&larr; 3.18.18 Separating Transcendence Base</a></span><span class="nav-center"><span class="current">3.19 Local Rings</span> <a href="3.19-local-rings.pdf" target="_blank" class="pdf-frag-badge" title="PDF of this section">PDF</a></span><span class="nav-right"><a href="3.20-modules-over-local-rings-nakayama-s-lemma.html">3.20 Modules over Local Rings (Nakayama’s Lemma) &rarr;</a></span></nav><h2 id="loc-134" class="section-heading">3.19 Local Rings</h2><p>Local rings arise quite naturally when localizing at a prime ideal (see (<a href="3.5.7-localisation-at-a-prime-ideal.html#thm-idealsoflocalring">3.5.42</a>) and (<a href="#thm-localizeatprime">3.19.5</a>)) so we recall some basic properties here.</p><div class="thm-block"><strong><a id="thm-localring" href="#thm-localring" class="thm-anchor">Definition 3.19.1 (Local Ring)</a></strong><br><em><p>A ring <math><mi>𝐴</mi></math> is a <strong>local ring</strong> if it has a unique maximal ideal <math><mi>𝔪</mi></math>. The field <math><mi>𝐴</mi><mi>/</mi><mi>𝔪</mi></math> is called the <strong>residue field</strong> of <math><mi>𝐴</mi></math> and sometimes denoted <math><mi>𝜅</mi><mrow><mo>(</mo><mi>𝔪</mi><mo>)</mo></mrow></math>.</p><p>When <math><mi>𝐴</mi></math> is a <math><mi>𝑘</mi></math>-algebra we may denote the residue field by <math><mi>𝑘</mi><mrow><mo>(</mo><mi>𝔪</mi><mo>)</mo></mrow></math>.</p></em></div><div class="thm-block"><strong>Definition 3.19.2 (Local Homomorphism)</strong><br><em><p>Let <math><mrow><mo>(</mo><mrow><mi>𝐴</mi><mo>,</mo><msub><mi>𝔪</mi><mi>𝐴</mi></msub></mrow><mo>)</mo></mrow></math> and <math><mrow><mo>(</mo><mrow><mi>𝐵</mi><mo>,</mo><msub><mi>𝔪</mi><mi>𝐵</mi></msub></mrow><mo>)</mo></mrow></math> be local rings. A ring homomorphism <math><mi>𝜙</mi><mo lspace="0.2777777777777778em" rspace="0.2777777777777778em">:</mo><mi>𝐴</mi><mo stretchy="false">→</mo><mi>𝐵</mi></math> is said to be a <strong>local homomorphism</strong> if</p><math display="block"><mi>𝜙</mi><mrow><mo>(</mo><msub><mi>𝔪</mi><mi>𝐴</mi></msub><mo>)</mo></mrow><mo>⊆</mo><msub><mi>𝔪</mi><mi>𝐵</mi></msub></math></em></div><p>Recall that the group of units <math><msup><mi>𝐴</mi><mo>⋆</mo></msup></math> of a ring is a saturated multiplicative set, that is</p><math display="block"><mi>𝑥</mi><mi>𝑦</mi><mo>∈</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup><mo stretchy="false">⟺</mo><mi>𝑥</mi><mo>∈</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup><mo>∧</mo><mi>𝑦</mi><mo>∈</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup></math><div class="thm-block"><strong><a id="thm-criterialocalring" href="#thm-criterialocalring" class="thm-anchor">Proposition 3.19.3 (Criteria for Local Rings)</a></strong><br><em><p>Let <math><mi>𝐴</mi></math> be a ring. Then the following are equivalent</p><ol><li><math><mi>𝐴</mi></math> is a local ring</li><li><math><mi>𝐴</mi><mo>∖</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup></math> is an additive subgroup of <math><mi>𝐴</mi></math></li></ol><p>In this case <math><mi>𝔪</mi><mo>=</mo><mi>𝐴</mi><mo>∖</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup></math> is the unique maximal ideal of <math><mi>𝐴</mi></math>.</p></em></div><div><p><em>Proof.</em> a) <math><mo lspace="0em" rspace="0em" stretchy="false">⟹</mo></math> b) Let <math><mi>𝔪</mi></math> be the unique maximal ideal then, because it’s proper, <math><mi>𝔪</mi><mo>∩</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup><mo>=</mo><mi>∅</mi><mo stretchy="false">⟹</mo><mi>𝔪</mi><mo>⊆</mo><mi>𝐴</mi><mo>∖</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup></math> by (<a href="3.3.1-commutative-rings.html#thm-properideal">3.3.13</a>). Conversely given <math><mi>𝑥</mi><mo>∈</mo><mi>𝐴</mi><mo>∖</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup></math> then <math><mrow><mo>(</mo><mi>𝑥</mi><mo>)</mo></mrow></math> is a proper ideal by (<a href="3.3.4-operations-on-ideals.html#thm-properidealpid">3.3.33</a>), and therefore contained in a maximal ideal (<a href="3.3.1-commutative-rings.html#thm-idealcontainedinmaximalideal">3.3.15</a>) which by uniqueness means <math><mi>𝑥</mi><mo>∈</mo><mi>𝔪</mi></math>.</p><p>b) <math><mo lspace="0em" rspace="0em" stretchy="false">⟹</mo></math> a) Define <math><mi>𝔪</mi><mo>=</mo><mi>𝐴</mi><mo>∖</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup></math> it’s a (prime) ideal because it is an additive subgroup and <math><msup><mi>𝐴</mi><mo>⋆</mo></msup></math> is a saturated multiplicative set. Let <math><mi>𝔞</mi></math> be a proper ideal then <math><mi>𝔞</mi><mo>∩</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup><mo>=</mo><mi>∅</mi><mo stretchy="false">⟹</mo><mi>𝔞</mi><mo>⊆</mo><mi>𝔪</mi></math>. Therefore <math><mi>𝔪</mi></math> is the unique maximal ideal.&nbsp;<math><mi>∎</mi></math></p></div><div class="thm-block"><strong><a id="thm-algebra-quotient-of-local-ring-is-local" href="#thm-algebra-quotient-of-local-ring-is-local" class="thm-anchor">Proposition 3.19.4 (Quotient of a Local Ring is Local)</a></strong><br><em>Let <math><mrow><mo>(</mo><mrow><mi>𝐴</mi><mo>,</mo><mi>𝔪</mi></mrow><mo>)</mo></mrow></math> be a local ring and <math><mi>𝔞</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">◃</mo><mi>𝐴</mi></math> a proper ideal. Then <math><mi>𝐴</mi><mi>/</mi><mi>𝔞</mi></math> is a local ring, with maximal ideal <math><mi>𝔪</mi><mi>/</mi><mi>𝔞</mi></math>.</em></div><div><p><em>Proof.</em> <em>Drafted by Claude Sonnet, reviewed by David Rufino.</em></p><p>As <math><mi>𝔞</mi></math> is proper, it is contained in some maximal ideal (<a href="3.3.1-commutative-rings.html#thm-idealcontainedinmaximalideal">3.3.15</a>), which must be <math><mi>𝔪</mi></math> by uniqueness; so <math><mi>𝔞</mi><mo>⊆</mo><mi>𝔪</mi></math>, and by the ideal correspondence of (<a href="3.3.5-quotient-rings.html#thm-quotientrings">3.3.56</a>), the maximal ideals of <math><mi>𝐴</mi><mi>/</mi><mi>𝔞</mi></math> correspond to the maximal ideals of <math><mi>𝐴</mi></math> containing <math><mi>𝔞</mi></math> – of which <math><mi>𝔪</mi></math> is the only one (as <math><mi>𝐴</mi></math> is local) – so <math><mi>𝐴</mi><mi>/</mi><mi>𝔞</mi></math> has the unique maximal ideal <math><mi>𝔪</mi><mi>/</mi><mi>𝔞</mi></math>, that is, is local.&nbsp;<math><mi>∎</mi></math></p></div><div class="thm-block"><strong><a id="thm-localizeatprime" href="#thm-localizeatprime" class="thm-anchor">Example 3.19.5</a></strong><br><em><p>Let <math><mi>𝐴</mi></math> be a ring and <math><mi>𝔭</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">◃</mo><mi>𝐴</mi></math> a prime ideal. Then <math><msub><mi>𝐴</mi><mi>𝔭</mi></msub></math> is a local ring with unique maximal ideal <math><mi>𝔭</mi><msub><mi>𝐴</mi><mi>𝔭</mi></msub></math>.</p><p>When <math><mi>𝐴</mi><mo>⊂</mo><mi>𝐾</mi></math> is a subring of a field then <math><mi>𝐴</mi><mo>⊂</mo><msub><mi>𝐴</mi><mi>𝔭</mi></msub><mo>⊂</mo><mi>𝐾</mi></math> in a natural way.</p></em></div><p>We may use this to provide another criteria</p><div class="thm-block"><strong><a id="thm-criterialocaldomain" href="#thm-criterialocaldomain" class="thm-anchor">Lemma 3.19.6 (Criteria for Local Domain)</a></strong><br><em><p>Let <math><mi>𝐴</mi><mo>⊂</mo><mi>𝐾</mi></math> be a subring of a field with a prime ideal <math><mi>𝔭</mi><mo lspace="0.2222222222222222em" rspace="0.2222222222222222em">◃</mo><mi>𝐴</mi></math>. Then <math><mi>𝐴</mi><mo>⊂</mo><msub><mi>𝐴</mi><mi>𝔭</mi></msub></math>.</p><p><math><mi>𝐴</mi></math> is a local ring with unique maximal ideal <math><mi>𝔭</mi></math> if and only if <math><mi>𝐴</mi><mo>=</mo><msub><mi>𝐴</mi><mi>𝔭</mi></msub></math>,</p></em></div><div><p><em>Proof.</em> We’ve observed that <math><msub><mi>𝐴</mi><mi>𝔭</mi></msub></math> is a local ring with unique maximal ideal <math><mi>𝔭</mi><msub><mi>𝐴</mi><mi>𝔭</mi></msub></math>.</p><p>If <math><mi>𝐴</mi><mo>=</mo><msub><mi>𝐴</mi><mi>𝔭</mi></msub></math> then it is a local ring and <math><mi>𝔭</mi><mo>⊂</mo><mi>𝔭</mi><msub><mi>𝐴</mi><mi>𝔭</mi></msub></math>. For <math><mi>𝑦</mi><mo>∉</mo><mi>𝔭</mi></math>, then <math><mfrac><mn>1</mn><mi>𝑦</mi></mfrac><mo>∈</mo><msub><mi>𝐴</mi><mi>𝔭</mi></msub><mo stretchy="false">⟹</mo><mfrac><mn>1</mn><mi>𝑦</mi></mfrac><mo>∈</mo><mi>𝐴</mi></math>. So we see that <math><mi>𝑥</mi><mo>∈</mo><mi>𝔭</mi><mo>,</mo><mi>𝑦</mi><mo>∉</mo><mi>𝔭</mi></math> we have <math><mfrac><mi>𝑥</mi><mi>𝑦</mi></mfrac><mo>∈</mo><mi>𝔭</mi></math> and <math><mi>𝔭</mi><mo>=</mo><mi>𝔭</mi><msub><mi>𝐴</mi><mi>𝔭</mi></msub></math>.</p><p>Conversely suppose <math><mi>𝐴</mi></math> is a local ring with unique maximal ideal <math><mi>𝔭</mi></math>. Then <math><mi>𝑦</mi><mo>∉</mo><mi>𝔭</mi><mo stretchy="false">⟹</mo><mi>𝑦</mi><mo>∈</mo><msup><mi>𝐴</mi><mo>⋆</mo></msup></math> and <math><msub><mi>𝐴</mi><mi>𝔭</mi></msub><mo>=</mo><mi>𝐴</mi></math> as required.&nbsp;<math><mi>∎</mi></math></p></div></div><script>try{parent.postMessage({tocPage:'3.19-local-rings.html'}, '*')}catch(e){}</script><script>var pending = new WeakMap();document.addEventListener('click', function(ev){var a = ev.target.closest('a[href*="#thm-"], a[href*="#bib-"]');if (!a) return;ev.preventDefault();if (pending.has(a)) { clearTimeout(pending.get(a)); pending.delete(a); return; }pending.set(a, setTimeout(function(){pending.delete(a);var href = a.getAttribute('href');var hashIdx = href.indexOf('#');var page = hashIdx > 0 ? href.slice(0, hashIdx) : '3.19-local-rings.html';var anchor = href.slice(hashIdx + 1);try{parent.postMessage({openRef:{page:page,anchor:anchor}}, '*')}catch(e){}}, 300));});document.addEventListener('dblclick', function(ev){var a = ev.target.closest('a[href*="#thm-"], a[href*="#bib-"]');if (!a) return;ev.preventDefault();window.location.href = a.getAttribute('href');});</script><script>if (window.name === 'ref') {document.body.classList.add('in-ref-panel');var nav = document.querySelector('nav.topbar');if (nav) nav.style.display = 'none';document.querySelectorAll('h1, h2, h3, [id^="thm-"]').forEach(function(el){el.style.scrollMarginTop = '0';});if (location.hash.indexOf('#thm-') === 0) {var target = document.getElementById(location.hash.slice(1));var thmDiv = target ? target.closest('.thm-block') : null;if (thmDiv) {var keep = [thmDiv];var next = thmDiv.nextElementSibling;if (next && next.tagName === 'DIV' && !next.classList.contains('thm-block') && next.textContent.trim().indexOf('Proof.') === 0) {keep.push(next);}var pc = document.querySelector('.page-content');Array.prototype.forEach.call(pc.children, function(child){if (keep.indexOf(child) === -1) child.style.display = 'none';});window.scrollTo(0, 0);}}}</script><script>(function(){function report(){var el = document.querySelector('.page-content');if (!el) return;try{parent.postMessage({contentRight: el.getBoundingClientRect().right}, '*')}catch(e){}}window.addEventListener('resize', report);window.addEventListener('load', report);report();})();</script></body></html>
