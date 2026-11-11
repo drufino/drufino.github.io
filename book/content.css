@@ -141,6 +141,34 @@ body {
 /* LaTeX/Typst's PDF fully justifies body text by default; the HTML export
    carries no such styling, so paragraphs default to the browser's
    ragged-right alignment unless set explicitly. */
+/* Typst's HTML export writes every enumeration as a plain <ol><li> and drops
+   the book's numbering pattern (a), b), c) at the top level, i), ii), ...
+   nested), so a browser would show 1. 2. 3. -- not matching the "a) ==> b)"
+   and ".c)" cross-references in the text. Restore the pattern here. An
+   explicit item number (the book's enum.item(3) continuation) comes out as
+   <li value="3">, which list counters honour, so those render as c).
+   The closing parenthesis comes from a custom counter style (a ::marker
+   content rule was tried first and is ignored by Safari); a browser without
+   @counter-style support ignores the second declaration and keeps the first,
+   giving the right letters with a full stop. Lists carrying an inline style
+   (the table of contents) are left alone. */
+@counter-style alpha-paren {
+  system: extends lower-alpha;
+  suffix: ") ";
+}
+@counter-style roman-paren {
+  system: extends lower-roman;
+  suffix: ") ";
+}
+.page-content ol:not([style]) {
+  list-style-type: lower-alpha;
+  list-style-type: alpha-paren;
+}
+.page-content ol:not([style]) ol:not([style]) {
+  list-style-type: lower-roman;
+  list-style-type: roman-paren;
+}
+
 .page-content p {
   text-align: justify;
   hyphens: auto;
